@@ -2,11 +2,25 @@ const express = require('express') //Express oferece um "combo" de funcionalidad
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-mongoose.connect('mongodb://127.0.0.1:27017/api')
-const User = mongoose.model('User', { name: String , email: String , password: String }); //model fornece as funções 
+const db = require("./config/db") //importar conexão
+
+
+db.on("connected", function () { //"on" efento de ficar ouvindo
+    console.log("connected!");
+});
+
+db.on("disconnected", function () {
+    console.log("disconnected!");
+});
+
+db.on("error", function (error) {
+    console.log('Connection error: ' + error);
+});
+
+const User = require("./models/user.model");
 
 const app = express() //Função "listen" usada para rodar o servidor. Espera 2 parâmetros, um a porta e outro uma função de callback para ser executada quando o servidor inicializar
-const users = []
+
 
 app.use(express.json())
 
