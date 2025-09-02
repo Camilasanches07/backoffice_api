@@ -1,5 +1,5 @@
-const User = require("../models/user.model");
-const bcrypt = require("bcrypt");
+import { bcrypt } from "bcrypt";
+import { User } from "../models/user.model";
 
 exports.getUsers = async (req, res) => {
   try {
@@ -72,7 +72,6 @@ exports.login = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(400).send("Credenciais inválidas!");
-    }
-
+    
    
-};
+}

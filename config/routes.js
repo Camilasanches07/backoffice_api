@@ -1,4 +1,4 @@
-const userRouter = require('../routes/user.router');
+import userRouter from '../routes/user.router';
 
 module.exports = (app) => {
     app.use("/api/users", userRouter);
